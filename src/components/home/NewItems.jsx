@@ -4,10 +4,12 @@ import axios from 'axios';
 import OwlCarousel from 'react-owl-carousel';
 import 'owl.carousel/dist/assets/owl.carousel.css';
 import 'owl.carousel/dist/assets/owl.theme.default.css';
+import CountDown from '../UI/CountDown';
 
 const NewItems = () => {
-  const [isLoading, setIsLoading] = useState(true);
-  const [newItemsData, setNewItemsData] = useState([])
+	const [isLoading, setIsLoading] = useState(true);
+	const [newItemsData, setNewItemsData] = useState([]);
+	
 
 	useEffect(() => {
 		async function getItems() {
@@ -23,11 +25,10 @@ const NewItems = () => {
 	}, []);
 
 
-
-
 	const options = {
 		nav: true,
-		items: 4,
+    items: 4,
+    loop: true,
 		margin: 10,
 		dots: false,
 		responsive: {
@@ -77,8 +78,11 @@ const NewItems = () => {
 										</Link>
 									</div>
 
-									<div className="de_countdown">
-									</div>
+									{item.expiryDate && (
+										<CountDown
+											expireTime={item.expiryDate}
+										/>
+									)}
 
 									<div className="nft__item_wrap">
 										<div className="nft__item_extra">
