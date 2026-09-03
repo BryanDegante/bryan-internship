@@ -36,7 +36,6 @@ const HotCollectionsCard = ({
 									height={'50px'}
 									borderRadius={'50%'}
 								/>
-
 							</>
 						) : (
 							<img

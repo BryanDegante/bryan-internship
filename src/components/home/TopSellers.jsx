@@ -30,10 +30,16 @@ const TopSellers = () => {
 						<ol className="author_list">
 							{isLoading
 								? [...Array(12)].map((_, index) => (
-										<SellerCard key={index} isLoading/>
+										<SellerCard key={index} isLoading />
 									))
 								: sellers.map((seller, index) => (
-									<SellerCard key={index} authorId={seller.authorId} authorImage={seller.authorImage} authorName={seller.authorName} price={seller.price}/>
+										<SellerCard
+											key={index}
+											authorId={seller.authorId}
+											authorImage={seller.authorImage}
+											authorName={seller.authorName}
+											price={seller.price}
+										/>
 									))}
 						</ol>
 					</div>
