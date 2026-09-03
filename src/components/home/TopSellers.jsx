@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import axios from 'axios';
+import SellerCard from '../UI/SellerCard';
 
 const TopSellers = () => {
 	const [sellers, setSellers] = useState([]);
@@ -30,65 +30,10 @@ const TopSellers = () => {
 						<ol className="author_list">
 							{isLoading
 								? [...Array(12)].map((_, index) => (
-										<li key={index}>
-											<div className="author_list_pp">
-												<Link to="/">
-													<div
-														className="skeleton-box"
-														style={{
-															width: '50px',
-															height: '50px',
-															borderRadius: '50%',
-														}}
-													/>
-													<i className="fa fa-check"></i>
-												</Link>
-											</div>
-											<div className="author_list_info">
-												<Link to="/">
-													<div
-														className="skeleton-box"
-														style={{
-															width: '100px',
-															height: '20px',
-														}}
-													/>
-												</Link>
-												<span>
-													<div
-														className="skeleton-box"
-														style={{
-															width: '40px',
-															height: '20px',
-														}}
-													/>
-												</span>
-											</div>
-										</li>
+										<SellerCard key={index} isLoading/>
 									))
 								: sellers.map((seller, index) => (
-										<li key={index}>
-											<div className="author_list_pp">
-												<Link
-													to={`/author/${seller.authorId}`}
-												>
-													<img
-														className="lazy pp-author"
-														src={seller.authorImage}
-														alt=""
-													/>
-													<i className="fa fa-check"></i>
-												</Link>
-											</div>
-											<div className="author_list_info">
-												<Link
-													to={`/author/${seller.authorId}`}
-												>
-													{seller.authorName}
-												</Link>
-												<span>{seller.price} ETH</span>
-											</div>
-										</li>
+									<SellerCard key={index} authorId={seller.authorId} authorImage={seller.authorImage} authorName={seller.authorName} price={seller.price}/>
 									))}
 						</ol>
 					</div>
