@@ -14,7 +14,7 @@ const ExploreItems = () => {
 				'https://us-central1-nft-cloud-functions.cloudfunctions.net/explore',
 			);
 			setExploreItems(data);
-			setIsLoading(true);
+			setIsLoading(false);
 		}
 		getExploreItems();
 	}, []);
