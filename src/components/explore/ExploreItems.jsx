@@ -6,7 +6,7 @@ import Item from '../UI/Item';
 const ExploreItems = () => {
 	const [exploreItems, setExploreItems] = useState([]);
 	const [isLoading, setIsLoading] = useState(true);
-	const [itemsToShow, setItemsToShow ] = useState(8)
+	const [itemsToShow, setItemsToShow] = useState(8);
 
 	useEffect(() => {
 		async function getExploreItems() {
@@ -14,7 +14,7 @@ const ExploreItems = () => {
 				'https://us-central1-nft-cloud-functions.cloudfunctions.net/explore',
 			);
 			setExploreItems(data);
-			setIsLoading(false);
+			setIsLoading(true);
 		}
 		getExploreItems();
 	}, []);
@@ -37,30 +37,53 @@ const ExploreItems = () => {
 					<option value="likes_high_to_low">Most liked</option>
 				</select>
 			</div>
-			{exploreItems.slice(0,itemsToShow).map((item, index) => (
-				<div
-					key={index}
-					className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
-					style={{ display: 'block', backgroundSize: 'cover' }}
-				>
-					<Item
-						authorId={item.authorId}
-						authorImage={item.authorImage}
-						expiryDate={item.expiryDate}
-						nftId={item.nftId}
-						price={item.price}
-						title={item.title}
-						likes={item.likes}
-						nftImage={item.nftImage}
-					/>
-				</div>
-			))}
+			{isLoading
+				? [...Array(8)].map((_, index) => (
+						<div
+							key={index}
+							className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
+							style={{
+								display: 'block',
+								backgroundSize: 'cover',
+							}}
+						>
+							<Item isLoading />
+						</div>
+					))
+				: exploreItems.slice(0, itemsToShow).map((item, index) => (
+						<div
+							key={index}
+							className="d-item col-lg-3 col-md-6 col-sm-6 col-xs-12"
+							style={{
+								display: 'block',
+								backgroundSize: 'cover',
+							}}
+						>
+							<Item
+								authorId={item.authorId}
+								authorImage={item.authorImage}
+								expiryDate={item.expiryDate}
+								nftId={item.nftId}
+								price={item.price}
+								title={item.title}
+								likes={item.likes}
+								nftImage={item.nftImage}
+							/>
+						</div>
+					))}
 			<div className="col-md-12 text-center">
-				{exploreItems.length > itemsToShow ? 
-				<Link to="" onClick={loadMore} id="loadmore" className="btn-main lead">
-					Load more
-				</Link>
-				: ''}
+				{exploreItems.length > itemsToShow ? (
+					<Link
+						to=""
+						onClick={loadMore}
+						id="loadmore"
+						className="btn-main lead"
+					>
+						Load more
+					</Link>
+				) : (
+					''
+				)}
 			</div>
 		</>
 	);
