@@ -9,6 +9,8 @@ const Author = () => {
 	const [isLoading, setIsLoading] = useState(true);
 	const [author, setAuthor] = useState({});
 	const { id } = useParams();
+	const [followerCount, setFollowerCount] = useState(0);
+	const [ isFollowing, setIsFollowing ] = useState(false);
 
 	useEffect(() => {
 		window.scrollTo(0, 0);
@@ -17,10 +19,20 @@ const Author = () => {
 				`https://us-central1-nft-cloud-functions.cloudfunctions.net/authors?author=${id}`,
 			);
 			setAuthor(data);
+			setFollowerCount(data.followers);
 			setIsLoading(false);
 		}
 		getAuthor();
 	}, [id]);
+
+	function handleFollow() {
+		if (isFollowing) {
+			setFollowerCount((prev) => prev - 1);
+		} else {
+			setFollowerCount((prev) => prev + 1);
+		}
+		setIsFollowing((prev) => !prev);
+	}
 
 	return (
 		<div id="wrapper">
@@ -101,14 +113,25 @@ const Author = () => {
 									<div className="profile_follow de-flex">
 										<div className="de-flex-col">
 											<div className="profile_follower">
-
-												{!isLoading && `${author.followers} followers`}
+												{!isLoading &&
+													`${followerCount} followers`}
 											</div>
-											{isLoading ? <Skeleton width={'150px'} height={'40px'} /> : 
-											<Link to="#" className="btn-main">
-												Follow
-											</Link>
-											}
+											{isLoading ? (
+												<Skeleton
+													width={'150px'}
+													height={'40px'}
+												/>
+											) : (
+												<Link
+													to="#"
+													onClick={handleFollow}
+													className="btn-main"
+												>
+													{isFollowing
+														? 'Unfollow'
+														: 'Follow'}
+												</Link>
+											)}
 										</div>
 									</div>
 								</div>
@@ -117,10 +140,10 @@ const Author = () => {
 							<div className="col-md-12">
 								<div className="de_tab tab_simple">
 									<AuthorItems
-										items={author.nftCollection }
+										items={author.nftCollection}
 										image={author.authorImage}
 										id={author.authorId}
-										isLoading ={isLoading}
+										isLoading={isLoading}
 									/>
 								</div>
 							</div>
