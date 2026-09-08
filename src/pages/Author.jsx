@@ -83,7 +83,7 @@ const Author = () => {
 																width={'100px'}
 															/>
 														) : (
-															author.tag
+															`@${author.tag}`
 														)}
 													</span>
 													<span
