@@ -48,7 +48,7 @@ const HotCollections = () => {
 			<div className="container">
 				<div className="row">
 					<div className="col-lg-12">
-						<div className="text-center">
+						<div className="text-center" data-aos="fade">
 							<h2>Hot Collections</h2>
 							<div className="small-border bg-color-2"></div>
 						</div>
@@ -57,6 +57,7 @@ const HotCollections = () => {
 						className="owl-theme"
 						{...options}
 						key={isLoading ? 'loading' : 'loaded'}
+						data-aos="fade"
 					>
 						{isLoading
 							? [...Array(6)].map((_, index) => (

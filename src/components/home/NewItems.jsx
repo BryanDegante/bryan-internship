@@ -49,7 +49,7 @@ const NewItems = () => {
 			<div className="container">
 				<div className="row">
 					<div className="col-lg-12">
-						<div className="text-center">
+						<div className="text-center" data-aos="fade">
 							<h2>New Items</h2>
 							<div className="small-border bg-color-2"></div>
 						</div>
@@ -58,6 +58,7 @@ const NewItems = () => {
 						className="owl-theme"
 						{...options}
 						key={isLoading ? 'loading' : 'loaded'}
+						data-aos="fade"
 					>
 						{isLoading
 							? [...Array(6)].map((_, index) => (

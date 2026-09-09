@@ -11,7 +11,7 @@ const ExploreItems = () => {
 	useEffect(() => {
 		getExploreItems();
 	}, []);
-	
+
 	async function getExploreItems() {
 		const { data } = await axios.get(
 			'https://us-central1-nft-cloud-functions.cloudfunctions.net/explore',
@@ -38,9 +38,13 @@ const ExploreItems = () => {
 	return (
 		<>
 			<div>
-				<select id="filter-items" defaultValue="" onChange={(event) => {
-					filterItems(event.target.value);
-				} }>
+				<select
+					id="filter-items"
+					defaultValue=""
+					onChange={(event) => {
+						filterItems(event.target.value);
+					}}
+				>
 					<option value="">Default</option>
 					<option value="price_low_to_high">
 						Price, Low to High
@@ -72,18 +76,23 @@ const ExploreItems = () => {
 								display: 'block',
 								backgroundSize: 'cover',
 							}}
+					>
+						<div
+							data-aos="fade"
 						>
+
 							<Item
-								authorId={item.authorId}
-								authorImage={item.authorImage}
-								expiryDate={item.expiryDate}
-								nftId={item.nftId}
-								price={item.price}
-								title={item.title}
-								likes={item.likes}
-								nftImage={item.nftImage}
+							authorId={item.authorId}
+							authorImage={item.authorImage}
+							expiryDate={item.expiryDate}
+							nftId={item.nftId}
+							price={item.price}
+							title={item.title}
+							likes={item.likes}
+							nftImage={item.nftImage}
 							/>
 						</div>
+							</div>
 					))}
 			<div className="col-md-12 text-center">
 				{exploreItems.length > itemsToShow ? (
